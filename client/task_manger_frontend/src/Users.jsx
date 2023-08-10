@@ -23,8 +23,9 @@ const Users = () => {
             <div key={i} style={{border:"1px solid black", display:"flex", flexDirection:"column"}}>
               <h3>{user.username}</h3>
               <p>
+                <span><b>ID:</b> {user.id}</span><br/>
                 <span><b>Email:</b> {user.email}</span><br/>
-                <span><b>ID:</b> {user.id}</span>
+                <span><b>Password:</b> {user.password}</span>
               </p>
             </div>
           )

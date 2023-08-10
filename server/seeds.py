@@ -1,6 +1,10 @@
 from app import app
 from models import db, User, Task
 from datetime import datetime
+from faker import Faker
+from random import randint
+
+fake = Faker()
 
 def run_seeds():
     print('Seeding database ... 🌱')
@@ -9,15 +13,18 @@ def run_seeds():
         db.drop_all()
         db.create_all()
         
-        user1 = User('Joreerb', 'jorb@jorb.com', '0000')
+        allUsers = []
+        allTasks = []
 
-        db.session.add_all([user1])
-        db.session.commit()
+        for _ in range(30):
+            user = User(fake.user_name(), fake.ascii_email(), fake.ripe_id())
+            task = Task(randint(0,31), fake.text(max_nb_chars=20), fake.text(max_nb_chars=160), fake.future_date())
+            allUsers.append(user)
+            allTasks.append(task)
 
-        task1 = Task(1, 'Demo task', 'Seeding the database', datetime.strptime(('01/01/31 17:00:00'), '%m/%d/%y %H:%M:%S'))
-
-        db.session.add_all([task1])
-        db.session.commit()
+            db.session.add_all([user])
+            db.session.add_all([task])
+            db.session.commit()
 
 
         print('Done! 🌳')
