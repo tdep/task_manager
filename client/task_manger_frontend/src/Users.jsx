@@ -20,10 +20,12 @@ const Users = () => {
       <div>
         {allUsers.map((user, i) => {
           return (
-            <div key={i}>
-              <p>{user.username}</p>
-              <p>{user.email}</p>
-              <p>{user.id}</p>
+            <div key={i} style={{border:"1px solid black", display:"flex", flexDirection:"column"}}>
+              <h3>{user.username}</h3>
+              <p>
+                <span><b>Email:</b> {user.email}</span><br/>
+                <span><b>ID:</b> {user.id}</span>
+              </p>
             </div>
           )
         })}

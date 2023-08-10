@@ -22,10 +22,12 @@ const Tasks = () => {
         {allTasks.map((task, i) => {
           return (
             <>
-              <div key={i}>
-                <p>{task.title}</p>
-                <p>{task.description}</p>
-                <p>{task.user_id}</p>
+              <div key={i} style={{border:"1px solid black", display:"flex", flexDirection:"column"}}>
+                <h3>{task.title}</h3>
+                <p>
+                  <span><b>Description:</b> {task.description}</span><br/>
+                  <span><b>Due Date:</b> {task.due_date}</span>
+                </p>
               </div>
             </>
           )
