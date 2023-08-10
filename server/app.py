@@ -15,11 +15,23 @@ migrate = Migrate(app, db)
 def home():
     return send_file('welcome.html')
 
-@app.get('/users')
-def all_users():
+@app.route('/users')
+def index():
     users = User.query.all()
     return jsonify([user.to_dict() for user in users])
 
+@app.route('/users/<int:id>')
+def show_user(id):
+    users = User.query.all()
+    if len(users):
+        users_data = []
+        for user in users:
+            if user.id == id:
+                users_data.append(user.toJSON())
+        return jsonify(users_data)
+    else:
+        return {}, 404
+    
 @app.get('/tasks')
 def all_tasks():
     tasks = Task.query.all()
